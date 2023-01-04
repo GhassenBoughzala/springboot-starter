@@ -1,10 +1,10 @@
-package com.getarrays.employeemanager;
+package com.example.mdbspringboot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EmployeemanagerApplicationTests {
+class MdbSpringbootApplicationTests {
 
 	@Test
 	void contextLoads() {
