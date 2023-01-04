@@ -39,6 +39,7 @@ public class Employee implements Serializable {
 		this.imgUrl = imgUrl;
 		this.employeeCode = employeeCode;
 	}
+	
 
 	@Override
 	public String toString() {

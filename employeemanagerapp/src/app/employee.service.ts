@@ -14,11 +14,11 @@ export class EmployeeService {
   constructor(private http: HttpClient){}
 
   public getEmployees(): Observable<Employee[]>{
-      return this.http.get<Employee[]>(`${this.apiServerURL}/employee/all`)
+      return this.http.get<Employee[]>(`${this.apiServerURL}/employee`)
   }
 
   public addEmployee(employee: Employee): Observable<Employee>{
-      return this.http.post<Employee>(`${this.apiServerURL}/employee/add`, employee)
+      return this.http.post<Employee>(`${this.apiServerURL}/employee`, employee)
   }
 
   public updateEmployee(employee: Employee): Observable<Employee>{
