@@ -10,8 +10,10 @@ import { EmployeeService } from './employee.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+
   employees!: Employee[];
   editEmployee!: Employee;
+  deleteEmployee!: Employee;
   constructor(private employeeService: EmployeeService) {}
 
   ngOnInit(): void {
@@ -53,6 +55,18 @@ export class AppComponent implements OnInit {
       },
       (err: HttpErrorResponse) => {
         alert(err.message);
+      }
+    );
+  }
+
+  public onDeleteEmloyee(employeeId: number): void {
+    this.employeeService.deleteEmployee(employeeId).subscribe(
+      (response: void) => {
+        console.log(response);
+        this.getEmployees();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
       }
     );
   }
