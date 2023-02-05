@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Employee } from './employee';
-import { EmployeeService } from './employee.service';
+import { EmployeeService } from '../employee/employee.service';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +10,11 @@ import { EmployeeService } from './employee.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-
   employees!: Employee[];
   editEmployee!: Employee;
   deleteEmployee!: Employee;
+  EMP!: Employee[]
+  test= {test: 'test'}
   constructor(private employeeService: EmployeeService) {}
 
   ngOnInit(): void {
@@ -23,7 +24,7 @@ export class AppComponent implements OnInit {
   public getEmployees(): void {
     this.employeeService.getEmployees().subscribe(
       (res: Employee[]) => {
-        this.employees = res;
+        this.EMP = res;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -32,8 +33,7 @@ export class AppComponent implements OnInit {
   }
 
   public onAddEmployee(addForm: NgForm): void {
-    const on = document.getElementById('add-employee-form');
-    on!.click();
+    document.getElementById('add-employee-form')?.click();    
     this.employeeService.addEmployee(addForm.value).subscribe(
       (res: Employee) => {
         console.log(res);
@@ -50,7 +50,6 @@ export class AppComponent implements OnInit {
   public onUpdateEmployee(employee: Employee): void {
     this.employeeService.updateEmployee(employee).subscribe(
       (res: Employee) => {
-        console.log(res);
         this.getEmployees();
       },
       (err: HttpErrorResponse) => {
@@ -59,7 +58,7 @@ export class AppComponent implements OnInit {
     );
   }
 
-  public onDeleteEmloyee(employeeId: number): void {
+  public onDeleteEmloyee(employeeId: String): void {
     this.employeeService.deleteEmployee(employeeId).subscribe(
       (response: void) => {
         console.log(response);
@@ -71,6 +70,7 @@ export class AppComponent implements OnInit {
     );
   }
 
+
   public onOpenModal(employee: Employee | null, mode: String): void {
     const container = document.getElementById('main');
     const button = document.createElement('button');
@@ -78,10 +78,10 @@ export class AppComponent implements OnInit {
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
     if (mode === 'add') {
-      button.setAttribute('data-target', '#addEmployeeModal');
+      button.setAttribute('data-target', '#addEmpModal');
     }
     if (mode === 'edit') {
-      button.setAttribute('data-target', '#updateEmpModal');
+      button.setAttribute('data-target', '#editEmpModal');
     }
     if (mode === 'delete') {
       button.setAttribute('data-target', '#deleteEmpModal');

@@ -1,4 +1,4 @@
-import { Employee } from './employee';
+import { Employee } from '../app/employee';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -22,10 +22,10 @@ export class EmployeeService {
   }
 
   public updateEmployee(employee: Employee): Observable<Employee>{
-      return this.http.put<Employee>(`${this.apiServerURL}/employee/update`, employee)
+      return this.http.put<Employee>(`${this.apiServerURL}/employee`, employee)
   }
 
-  public deleteEmployee(employeeId: number): Observable<void>{
-      return this.http.delete<void>(`${this.apiServerURL}/employee/delete/${employeeId}`)
+  public deleteEmployee(employeeId: String): Observable<void>{
+      return this.http.delete<void>(`${this.apiServerURL}/employee/${employeeId}`)
   }
 }
